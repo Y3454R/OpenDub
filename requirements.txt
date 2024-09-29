@@ -1,6 +1,7 @@
-torch==1.11.0
-transformers==4.19.0
-torchaudio==0.11.0
+torch==2.1.0
+transformers>=4.33.0 
+torchaudio==2.1.0
 gtts==2.2.3
 pysrt==1.1.2
-
+TTS==0.21.3
+speechbrain
