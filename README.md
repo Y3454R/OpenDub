@@ -1,6 +1,6 @@
-# OpenSync
+# OpenDub 🥥
 
-**OpenSync** is a powerful tool for generating translated dialogues from subtitles while preserving the original voice. It utilizes speech recognition, machine translation, and voice cloning technologies to ensure that the translated dialogue stays in sync with the original audio. Perfect for projects in film, media, or any context where translated content needs to maintain the integrity of the speaker’s voice.
+**OpenDub** is a powerful tool for generating translated dialogues from subtitles while preserving the original voice. It utilizes speech recognition, machine translation, and voice cloning technologies to ensure that the translated dialogue stays in sync with the original audio. Perfect for projects in film, media, or any context where translated content needs to maintain the integrity of the speaker’s voice.
 
 ## Features
 
