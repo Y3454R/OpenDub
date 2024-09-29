@@ -2,6 +2,9 @@
 
 **OpenDub** is a powerful tool for generating translated dialogues from subtitles while preserving the original voice. It utilizes speech recognition, machine translation, and voice cloning technologies to ensure that the translated dialogue stays in sync with the original audio. Perfect for projects in film, media, or any context where translated content needs to maintain the integrity of the speaker’s voice.
 
+## Demo
+This is a demo version for Spanish (audio + subtitles) to English dubbing generation. (Still not working though)
+
 ## Features
 
 - **Automatic Speech Recognition (ASR):** Extracts text from original audio files.
@@ -33,7 +36,7 @@ python app.py
 ```
 #### Output: The dubbed audio will be saved in the `src/output/output_audio.wav` file.
 
-
+ <!--
 ## Differentiation of OpenDub
 
 **OpenDub** can differentiate itself from existing dubbing projects in several ways:
@@ -74,4 +77,4 @@ python app.py
 - **Respect for Copyright**: Provide clear guidelines on how to use the dubbing technology responsibly, respecting the rights of original content creators.
 - **Inclusive Representation**: Ensure that voice options and content are diverse and represent various cultures fairly.
 
-Made with [ChatGPT](https://chatgpt.com/share/66f8edee-b448-8002-bdd0-4f6ee433dcb6)
+Made with [ChatGPT](https://chatgpt.com/share/66f8edee-b448-8002-bdd0-4f6ee433dcb6) -->
