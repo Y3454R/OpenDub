@@ -15,6 +15,24 @@
 2. **Subtitle Translation**: The extracted text or subtitle file is translated into the target language using a powerful machine translation engine.
 3. **Voice Cloning**: The system clones the speaker’s voice using advanced TTS (Text-to-Speech) with voice cloning capabilities.
 
+## How To Run
+
+#### Install Dependencies: In your virtual environment, install the required libraries:
+
+```bash
+pip install -r requirements.txt
+```
+#### Place Test Files:
+
+Put a Spanish audio file in `src/audio/input_audio.wav`.
+Place the matching Spanish subtitle file in `src/subtitles/input_subtitles.srt`.
+#### Run the Application: Execute the main script to run the entire pipeline:
+
+```bash
+python app.py
+```
+#### Output: The dubbed audio will be saved in the `src/output/output_audio.wav` file.
+
 
 ## Differentiation of OpenDub
 
