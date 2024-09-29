@@ -55,3 +55,5 @@
 ### 9. Focus on Ethical Practices
 - **Respect for Copyright**: Provide clear guidelines on how to use the dubbing technology responsibly, respecting the rights of original content creators.
 - **Inclusive Representation**: Ensure that voice options and content are diverse and represent various cultures fairly.
+
+Made with [ChatGPT](https://chatgpt.com/share/66f8edee-b448-8002-bdd0-4f6ee433dcb6)
