@@ -1,49 +1,28 @@
-# src/model/voice_cloning.py
+"""
+Voice cloning module using TTS for OpenDub project.
+Clones voice from source audio and generates new speech.
+"""
 
-import os
 from TTS.api import TTS
+import numpy as np
+import soundfile as sf
 
-# Define paths for input audio and output audio
-input_audio_path = "src/audio/input_audio.wav"
-output_audio_path = "src/output/output_audio.wav"
-
-def voice_cloning(input_audio, text, output_audio):
+def voice_clone(source_wav, target_text, output_path):
     """
-    Clones the voice from the input audio and synthesizes the translated text in that voice.
-    
+    Clone voice and generate new speech.
+
     Args:
-        input_audio (str): Path to the input audio file for voice cloning.
-        text (str): Translated text to synthesize.
-        output_audio (str): Path where the generated audio will be saved.
+        source_wav (str): Source audio file path.
+        target_text (str): Text for new speech.
+        output_path (str): Output audio file path.
     """
-    try:
-        # Initialize the TTS model for voice cloning (Coqui TTS)
-        model_name = "tts_models/en/vctk/vits"  # You can explore other models from Coqui TTS
-        tts = TTS(model_name)
+    tts = TTS(model_name="tts_models/multilingual/multi-dataset/your_tts", progress_bar=False, gpu=False)
+    wav = tts.tts(text=target_text, speaker_wav=source_wav, language="en")
 
-        # Extract speaker embedding from input audio
-        speaker_embedding = tts.get_speaker_embedding(input_audio)
-        
-        # Generate new audio with the translated text and cloned voice
-        cloned_audio = tts.tts(text, speaker_embeddings=speaker_embedding)
-
-        # Save the cloned voice audio output to the output_audio path
-        tts.save_wav(cloned_audio, output_audio)
-        print(f"Generated cloned audio saved at: {output_audio}")
-        
-    except Exception as e:
-        print(f"Error during voice cloning: {str(e)}")
-
-if __name__ == "__main__":
-    # Check if input audio exists
-    if os.path.exists(input_audio_path):
-        print(f"Found input audio: {input_audio_path}")
-
-        # Sample translated text from your translation system (this should be dynamic)
-        translated_text = "Hello, how are you?"
-
-        # Perform voice cloning using the input audio and translated text
-        voice_cloning(input_audio_path, translated_text, output_audio_path)
-    else:
-        print(f"Error: Input audio file not found at {input_audio_path}")
+    audio_array = np.array(wav)
+    if audio_array.ndim == 1:
+        audio_array = np.array([audio_array, audio_array])
+    
+    audio_array = audio_array.T
+    sf.write(output_path, audio_array, tts.synthesizer.output_sample_rate, 'PCM_16')
 
