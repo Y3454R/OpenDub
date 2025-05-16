@@ -24,8 +24,8 @@ This is a demo version for Spanish (audio + subtitles) to English dubbing genera
 #### Setup Python environment with pyenv
 
 ```bash
-pyenv install 3.11.5
-pyenv virtualenv 3.11.5 opendub-env
+pyenv install 3.10.3
+pyenv virtualenv 3.10.3 opendub-env
 cd /Users/adibasubah/OpenDub
 pyenv local opendub-env
 ```
