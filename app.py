@@ -12,9 +12,11 @@ Dependencies: src.model.emotion_recognition, src.model.translation, src.model.vo
 """
 
 import os
+import traceback
 from src.model.emotion_recognition import detect_emotion
 from src.model.translation import translate_subtitles
 from src.model.voice_cloning import voice_clone
+
 
 def main():
     """
@@ -31,9 +33,9 @@ def main():
         RuntimeError: If processing fails.
     """
     try:
-        audio_file = 'src/audio/input_audio.wav'
-        subtitle_file = 'src/subtitles/input_subtitles.srt'
-        output_file = 'src/output/output_audio.wav'
+        audio_file = "src/audio/input_audio.wav"
+        subtitle_file = "src/subtitles/input_subtitles.srt"
+        output_file = "src/output/output_audio.wav"
 
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
@@ -42,7 +44,7 @@ def main():
         print(f"Detected Emotion: {emotion}")
 
         print("Translating subtitles...")
-        translated_subs = translate_subtitles(subtitle_file, target_lang='en')
+        translated_subs = translate_subtitles(subtitle_file, target_lang="en")
         for sub in translated_subs:
             print(sub.text)
 
@@ -56,7 +58,9 @@ def main():
     except RuntimeError as e:
         print(f"Error: Processing failed. {e}")
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print("Unexpected error:")
+        traceback.print_exc()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
