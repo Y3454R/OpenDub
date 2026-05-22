@@ -62,14 +62,11 @@ class Pipeline:
             )
 
         # ── 2. Separate vocals / background ─────────────────────────────
-        bg_path = None
-        if self.voice_cloning:
-            print("\n[2/8] Separating vocals from background (Demucs)...")
-            vocals_path, bg_path = separator.separate(audio_path, work_dir)
-            # Use isolated vocals as the speaker reference for kNN-VC
-            speaker_ref = vocals_path
-        else:
-            speaker_ref = audio_path
+        # Always separate so background music is preserved in the final output.
+        # vocals_path is also used as the speaker reference for kNN-VC.
+        print("\n[2/8] Separating vocals from background (Demucs)...")
+        vocals_path, bg_path = separator.separate(audio_path, work_dir)
+        speaker_ref = vocals_path if self.voice_cloning else audio_path
 
         # ── 3. Parse subtitles + slice audio ────────────────────────────
         print("\n[3/8] Parsing subtitles and slicing audio...")
