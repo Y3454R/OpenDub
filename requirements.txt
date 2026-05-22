@@ -1,0 +1,11 @@
+torch
+torchaudio
+transformers
+accelerate
+pysrt
+librosa
+soundfile
+scipy
+pyrubberband
+pyworld
+demucs
