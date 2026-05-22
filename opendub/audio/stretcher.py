@@ -1,31 +1,41 @@
 import numpy as np
 import librosa
 import soundfile as sf
-from scipy.signal import resample
 
 _RATIO_MIN = 0.5
 _RATIO_MAX = 2.0
+
+try:
+    import pyrubberband as rb
+    _USE_RUBBERBAND = True
+except ImportError:
+    _USE_RUBBERBAND = False
 
 
 def stretch(audio_path: str, target_duration: float) -> None:
     """Time-stretch audio file in-place to match target_duration (seconds).
 
-    Uses scipy resample (pitch-preserving via rate change). Skips segments
-    whose stretch ratio falls outside [0.5, 2.0] to avoid audible artifacts.
-    Returns the actual duration after stretching.
+    Uses rubberband (pitch-preserving TSM) when available, falls back to
+    librosa's phase vocoder. scipy.signal.resample is NOT used — it changes
+    pitch by coupling it to duration (tape-speed effect).
+    Skips segments whose ratio falls outside [0.5, 2.0].
     """
     y, sr = librosa.load(audio_path, sr=None)
     if len(y) == 0 or target_duration <= 0:
         return
 
     src_dur = len(y) / sr
-    ratio   = src_dur / target_duration
+    ratio   = src_dur / target_duration  # >1 = BN longer than EN → speed up
 
     if not (_RATIO_MIN < ratio < _RATIO_MAX):
         return
 
-    target_len = int(len(y) / ratio)
-    y_stretched = resample(y, target_len).astype(np.float32)
+    if _USE_RUBBERBAND:
+        y_stretched = rb.time_stretch(y, sr, ratio).astype(np.float32)
+    else:
+        # librosa phase vocoder: preserves pitch, requires float32 input
+        y_stretched = librosa.effects.time_stretch(y.astype(np.float32), rate=ratio)
+
     sf.write(audio_path, y_stretched, sr)
 
 
